@@ -14,7 +14,7 @@ import Game from './views/Game';
 // import SavedJobs from './views/SavedJobs';
 
 // import { useUserContext } from './contexts/UserContext';
-import { useAuth0 } from './react-auth0-spa';
+// import { useAuth0 } from './react-auth0-spa';
 // import UserInfo from './components/UserInfo';
 // import CoverPage from './components/CoverPage';
 // import Resume from './components/Resume';
@@ -23,26 +23,26 @@ import { useAuth0 } from './react-auth0-spa';
 import './App.css';
 
 const App = () => {
-  const { loading, isAuthenticated } = useAuth0();
+//   const { loading, isAuthenticated } = useAuth0();
 
-  if (loading) {
-    return <Loading />;
-  }
+//   if (loading) {
+//     return <Loading />;
+//   }
 
   return (
     <div id='app'>
-      {isAuthenticated ? <NavBar /> : null}
+      {/* {isAuthenticated ? <NavBar /> : null} */}
       <div className='row'>
         <Switch>
-          {isAuthenticated ? (
+          {/* {isAuthenticated ? (
             <Route exact path='/' component={Home} />
-          ) : (
+          ) : ( */}
             <Route>
               <NavBar />
               <Home />
               <Footer />
             </Route>
-          )}
+          {/* )} */}
 
           <PrivateRoute
             exact
@@ -74,7 +74,7 @@ const App = () => {
           <PrivateRoute path='/admin' component={AdminPlatform}></PrivateRoute>
         </Switch>
       </div>
-      {isAuthenticated ? <Footer /> : null}
+      {/* {isAuthenticated ? <Footer /> : null} */}
     </div>
   );
 };
