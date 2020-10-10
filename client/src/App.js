@@ -11,6 +11,7 @@ import Profile from './views/Profile';
 import AdminPlatform from './views/AdminPlatform';
 import Game from './views/Game';
 import Login from './components/Modals/Login';
+import { LoginProvider } from './contexts/LoginContext'
 // import jobListing from './views/jobListing';
 // import SavedJobs from './views/SavedJobs';
 
@@ -23,10 +24,8 @@ import Login from './components/Modals/Login';
 // styles/
 import './App.css';
 
-const App = (props) => {
-  console.log(props)
-  const [isOpen, setIsOpen] = useState(false);
-  let toggleModal = () => this.setState(state => ({open: !state.open}))
+const App = () => {
+
   // let state = { show: false };
 
   // let showModal = () => {
@@ -36,63 +35,65 @@ const App = (props) => {
   // let hideModal = () => {
   //   this.setState({ show: false });
   // };
-//   const { loading, isAuthenticated } = useAuth0();
+  //   const { loading, isAuthenticated } = useAuth0();
 
-//   if (loading) {
-//     return <Loading />;
-//   }
+  //   if (loading) {
+  //     return <Loading />;
+  //   }
 
   return (
-    <div id='app'>
-      {/* {isAuthenticated ? <NavBar /> : null} */}
-      <div className='row'>
-        <Switch>
-          {/* {isAuthenticated ? (
+    <LoginProvider>
+      <div id='app'>
+        {/* {isAuthenticated ? <NavBar /> : null} */}
+        <div className='row'>
+          <Switch>
+            {/* {isAuthenticated ? (
             <Route exact path='/' component={Home} />
           ) : ( */}
             <Route>
               <NavBar />
               <Home >
-                <Login 
-                  
+                <Login
+
                 />
               </Home>
               <Footer />
             </Route>
-          {/* )} */}
+            {/* )} */}
 
-          <PrivateRoute
-            exact
-            path='/userinfo'
+            <PrivateRoute
+              exact
+              path='/userinfo'
             // component={UserInfo}
-          ></PrivateRoute>
-          <PrivateRoute
-            exact
-            path='/joblisting'
+            ></PrivateRoute>
+            <PrivateRoute
+              exact
+              path='/joblisting'
             // component={jobListing}
-          ></PrivateRoute>
-          <PrivateRoute
-            exact
-            path='/joblisting/saved'
+            ></PrivateRoute>
+            <PrivateRoute
+              exact
+              path='/joblisting/saved'
             // component={SavedJobs}
-          ></PrivateRoute>
-          <PrivateRoute
-            exact
-            path='/coverpage'
+            ></PrivateRoute>
+            <PrivateRoute
+              exact
+              path='/coverpage'
             // component={CoverPage}
-          ></PrivateRoute>
-          <PrivateRoute 
-            exact path='/resume' 
+            ></PrivateRoute>
+            <PrivateRoute
+              exact path='/resume'
             // component={Resume}
-          ></PrivateRoute>
+            ></PrivateRoute>
 
-          <PrivateRoute path='/game' component={Game}></PrivateRoute>
-          <PrivateRoute path='/profile' component={Profile}></PrivateRoute>
-          <PrivateRoute path='/admin' component={AdminPlatform}></PrivateRoute>
-        </Switch>
+            <PrivateRoute path='/game' component={Game}></PrivateRoute>
+            <PrivateRoute path='/profile' component={Profile}></PrivateRoute>
+            <PrivateRoute path='/admin' component={AdminPlatform}></PrivateRoute>
+          </Switch>
+        </div>
+        {/* {isAuthenticated ? <Footer /> : null} */}
       </div>
-      {/* {isAuthenticated ? <Footer /> : null} */}
-    </div>
+    </LoginProvider>
   );
 };
 

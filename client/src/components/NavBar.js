@@ -1,16 +1,19 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import 'materialize-css';
 import Login from './Modals/Login';
 import{ useUserContext} from '../contexts/UserContext';
-// import { useAuth0 } from '../react-auth0-spa';
+import { LoginContext } from '../contexts/LoginContext';
 import logo from '../assets/J&D_Logo_BG_K.png';
+import { SettingsPowerRounded } from '@material-ui/icons';
 
 const NavBar = () => {
   const [state, dispatch] = useUserContext();
-  const [isOpen, setIsOpen] = useState();
-  const [isStudentLogin, setIsStudentLogin] = useState(false);
-  const [isAdminLogin, setIsAdminLogin] = useState(false);
+  // const [modal, student, admin] = useContext(LoginContext);
+  const [isOpen, setIsOpen] = useContext(LoginContext);
+  const [isStudentLogin, setIsStudentLogin] = useContext(LoginContext);
+  const [isAdminLogin, setIsAdminLogin] = useContext(LoginContext);
+
   // All content commented out may be needed later for reimplementation of passport login
 
   // const { isAuthenticated, loginWithRedirect, logout } = useAuth0();
@@ -40,15 +43,17 @@ const NavBar = () => {
   // };
   console.log(isAdminLogin, isStudentLogin)
   const handleStudentLogin = () => {
+    setIsOpen(true);
     // console.log("Student Logging in")
     setIsStudentLogin(true);
-    console.log(isStudentLogin)
+    console.log(isStudentLogin, isOpen)
   }
 
   const handleAdminLogin = () => {
     // console.log("Admin Logging in")
+    setIsOpen(true);
     setIsAdminLogin(true);
-    console.log(isAdminLogin)
+    console.log(isAdminLogin, isOpen)
   }
 
   // useEffect(() => {
