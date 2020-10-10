@@ -8,7 +8,7 @@ import fullBackground from '../assets/light_honeycomb.png';
 
 import 'materialize-css';
 
-function Home() {
+const Home = (props) => {
   return (
     <>
 
@@ -33,6 +33,7 @@ function Home() {
               src={brandLogo}
               alt='Brand Logo'
             />
+
           </div>
 
           <div className='container' style={descStyle}>

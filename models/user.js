@@ -2,7 +2,8 @@ var mongoose = require('mongoose');
 
 const AdminSchema = new mongoose.Schema({
   adminname: String,
-  password: String
+  password: String,
+  students: []
 });
 
 const UserSchema = new mongoose.Schema({

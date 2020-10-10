@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import 'materialize-css';
 
@@ -10,6 +10,7 @@ import Home from './views/Home';
 import Profile from './views/Profile';
 import AdminPlatform from './views/AdminPlatform';
 import Game from './views/Game';
+import Login from './components/Modals/Login';
 // import jobListing from './views/jobListing';
 // import SavedJobs from './views/SavedJobs';
 
@@ -22,7 +23,19 @@ import Game from './views/Game';
 // styles/
 import './App.css';
 
-const App = () => {
+const App = (props) => {
+  console.log(props)
+  const [isOpen, setIsOpen] = useState(false);
+  let toggleModal = () => this.setState(state => ({open: !state.open}))
+  // let state = { show: false };
+
+  // let showModal = () => {
+  //   this.setState({ show: true });
+  // };
+
+  // let hideModal = () => {
+  //   this.setState({ show: false });
+  // };
 //   const { loading, isAuthenticated } = useAuth0();
 
 //   if (loading) {
@@ -39,7 +52,11 @@ const App = () => {
           ) : ( */}
             <Route>
               <NavBar />
-              <Home />
+              <Home >
+                <Login 
+                  
+                />
+              </Home>
               <Footer />
             </Route>
           {/* )} */}

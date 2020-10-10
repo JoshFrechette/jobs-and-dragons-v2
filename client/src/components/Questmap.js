@@ -11,7 +11,7 @@ const Questmap = () => {
   // const [gameState] = usePlayerContext();
   const [state, dispatch] = usePlayerContext();
   const [isInteracting, setIsInteracting] = useState(false);
-  const [, setIsAccepted] = useState(false);
+  const [isAccepted, setIsAccepted] = useState(false);
 
   useEffect(() => {
     setIsInteracting(state.isInteracting);
