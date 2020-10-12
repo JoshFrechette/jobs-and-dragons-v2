@@ -1,18 +1,15 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext, useReducer } from 'react';
 import { Link } from 'react-router-dom';
 import 'materialize-css';
 import Login from './Modals/Login';
 import{ useUserContext} from '../contexts/UserContext';
-import { LoginContext } from '../contexts/LoginContext';
+import { useLoginContext } from '../contexts/LoginContext';
 import logo from '../assets/J&D_Logo_BG_K.png';
 import { SettingsPowerRounded } from '@material-ui/icons';
 
 const NavBar = () => {
-  const [state, dispatch] = useUserContext();
-  // const [modal, student, admin] = useContext(LoginContext);
-  const [isOpen, setIsOpen] = useContext(LoginContext);
-  const [isStudentLogin, setIsStudentLogin] = useContext(LoginContext);
-  const [isAdminLogin, setIsAdminLogin] = useContext(LoginContext);
+  // const [state, dispatch] = useUserContext();
+  const [state, dispatch] = useLoginContext();
 
   // All content commented out may be needed later for reimplementation of passport login
 
@@ -24,43 +21,20 @@ const NavBar = () => {
   //     returnTo: window.location.origin,
   //   });
 
-  // useEffect(() => {
-  //   if (isAuthenticated) {
-  //     setIsOpen(true);
-  //   } else {
-  //     setIsOpen(false);
-  //   }
-  // }, [isAuthenticated]);
-
-  // let state = { show: false };
-
-  // let showModal = () => {
-  //   this.setState({ show: true });
-  // };
-
-  // let hideModal = () => {
-  //   this.setState({ show: false });
-  // };
-  console.log(isAdminLogin, isStudentLogin)
   const handleStudentLogin = () => {
-    setIsOpen(true);
-    // console.log("Student Logging in")
-    setIsStudentLogin(true);
-    console.log(isStudentLogin, isOpen)
+    dispatch({  type: 'student'})
+    console.log(state)
   }
 
   const handleAdminLogin = () => {
-    // console.log("Admin Logging in")
-    setIsOpen(true);
-    setIsAdminLogin(true);
-    console.log(isAdminLogin, isOpen)
+     dispatch({  type: 'admin'})
+    console.log(state)
   }
 
   // useEffect(() => {
   //   setIsLoginModal(state.isLoginModal);
   // }, [state.isLoginModal]);
   
-
   return (
     <nav>
       <div className='nav-wrapper grey darken-4'>

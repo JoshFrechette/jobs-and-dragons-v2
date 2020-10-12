@@ -3,14 +3,14 @@ import 'materialize-css/dist/css/materialize.min.css';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { useUserContext } from '../../contexts/UserContext';
+import { useLoginContext } from '../../contexts/LoginContext';
 
-
-const Login = () => {
+const Login = ({ handleCLose, show, children }) => {
     const [registerUserName, setRegisterUserName] = useState('');
     const [registerPassword, setRegisterPassword] = useState('');
     const [loginUserName, setLoginUserName] = useState('');
     const [loginPassword, setLoginPassword] = useState('');
-    const [state] = useUserContext();
+    const [state, dispatch] = useLoginContext();
     const register = () => {
         axios({
             method: "post",
@@ -21,40 +21,73 @@ const Login = () => {
             withCredentials: true,
             url: "http://localhost:4000/resgister",
         })
-        .then((res) => console.log(res));
+            .then((res) => console.log(res));
     };
-    const login = () => {};
+    const login = () => { };
+
+    const close = () => dispatch({ type:'close-modal'})
 
     return (
-        <div className='modal-content'>
-            <div className='row'>
-                
-                <h1>Register</h1>
-                <input
-                    placeholder="Student Username"
-                    onChange={(e) => setRegisterUserName(e.target.value)}
-                />
-                <input
-                    placeholder="Student Password"
-                    onChange={(e) => setRegisterPassword(e.target.value)}
-                />
-                <button onClick={register}>Submit</button>
-            </div>   
+        
+        <div style={modal}>
+            <section style={modalMain}>
+                <div className='row'>
 
-            <div className='row'>
-                <h1>Login</h1>
-                <input
-                    placeholder="Student Username"
-                    onChange={(e) => setLoginUserName(e.target.value)}
-                />
-                <input
-                    placeholder="Student Password"
-                    onChange={(e) => setLoginPassword(e.target.value)}
-                />
-                <button onClick={login}>Submit</button>
-            </div>   
+                    <h1>Register</h1>
+                    <input
+                        placeholder="Student Username"
+                        onChange={(e) => setRegisterUserName(e.target.value)}
+                    />
+                    <input
+                        placeholder="Student Password"
+                        onChange={(e) => setRegisterPassword(e.target.value)}
+                    />
+                    <button onClick={register}>Submit</button>
+                </div>
+
+                <div className='row'>
+                    <h1>Login</h1>
+                    <input
+                        placeholder="Student Username"
+                        onChange={(e) => setLoginUserName(e.target.value)}
+                    />
+                    <input
+                        placeholder="Student Password"
+                        onChange={(e) => setLoginPassword(e.target.value)}
+                    />
+                    <button onClick={login}>Submit</button>
+                    <button onClick={close}>Close</button>
+                </div>
+            </section>
         </div>
     )
+}
+
+const modal = {
+    position: 'fixed',
+    top: '0',
+    left: '0',
+    width: '100%',
+    height: '100%',
+    background: 'rgba(0, 0, 0, 0.6)'
+};
+
+const modalMain = {
+    position: "fixed",
+    background: 'white',
+    width: '80%',
+    height: 'auto',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%,-50%)'
+};
+
+const displayBlock = {
+    display: 'block'
+};
+
+const displayNone = {
+    display: 'none'
 }
 
 export default Login;

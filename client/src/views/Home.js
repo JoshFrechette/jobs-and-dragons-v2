@@ -1,5 +1,9 @@
 import React from 'react';
 
+import Login from '../components/Modals/Login';
+import { useLoginContext } from '../contexts/LoginContext';
+
+
 import brandLogo from '../assets/J&D_newLogo.png';
 import background from '../assets/J&D_Dungeon_dark.jpg';
 import fullBackground from '../assets/light_honeycomb.png';
@@ -9,6 +13,10 @@ import fullBackground from '../assets/light_honeycomb.png';
 import 'materialize-css';
 
 const Home = (props) => {
+  const [state, dispatch] = useLoginContext();
+
+  const show = state.isOpen;
+
   return (
     <>
 
@@ -21,6 +29,12 @@ const Home = (props) => {
         />
 
         <div style={topStyle}>
+          {show ? (
+            <Login>
+              <p>{state.isStudentLogin}</p>
+            </Login>
+          ) : null}
+
           {/* <div style={loginStyle}>
             <h4>Guest Login</h4>
             <p>Email: jobsanddragons@gmail.com</p>
@@ -42,7 +56,6 @@ const Home = (props) => {
 
         </div>
 
-        {/* <LandingDescription /> */}
       </div>
 
     </>
@@ -83,13 +96,31 @@ const descStyle = {
   textShadow: '2px 2px black',
 };
 
-// const loginStyle = {
-//   marginTop: "0",
-//   top: "0",
-//   float: "right",
-//   color: 'white',
-//   width: "30rem",
-//   background: 'black'
-// }
+const modal = {
+  position: 'fixed',
+  top: '0',
+  left: '0',
+  width: '100%',
+  height: '100%',
+  background: 'rgba(0, 0, 0, 0.6)'
+};
+
+const modalMain = {
+  position: "fixed",
+  background: 'white',
+  width: '80%',
+  height: 'auto',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%,-50%)'
+};
+
+const displayBlock = {
+  display: 'block'
+};
+
+const displayNone = {
+  display: 'none'
+}
 
 export default Home;
