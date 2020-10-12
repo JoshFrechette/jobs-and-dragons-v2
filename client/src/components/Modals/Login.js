@@ -5,7 +5,7 @@ import axios from 'axios';
 import { useUserContext } from '../../contexts/UserContext';
 import { useLoginContext } from '../../contexts/LoginContext';
 
-const Login = ({ handleCLose, show, children }) => {
+const Login = () => {
     const [registerUserName, setRegisterUserName] = useState('');
     const [registerPassword, setRegisterPassword] = useState('');
     const [loginUserName, setLoginUserName] = useState('');
@@ -19,13 +19,18 @@ const Login = ({ handleCLose, show, children }) => {
                 password: registerPassword,
             },
             withCredentials: true,
-            url: "http://localhost:4000/resgister",
+            url: "http://localhost:4000/register",
         })
             .then((res) => console.log(res));
     };
-    const login = () => { };
+    const login = () => {
+
+    };
 
     const close = () => dispatch({ type:'close-modal'})
+
+    const placeholderName = state.isStudentLogin ? 'Student Username' : "Admin Username";
+    const placeholderPassword = state.isStudentLogin ? 'Student Password' : "Admin Password";
 
     return (
         
@@ -35,11 +40,11 @@ const Login = ({ handleCLose, show, children }) => {
 
                     <h1>Register</h1>
                     <input
-                        placeholder="Student Username"
+                        placeholder= {placeholderName}
                         onChange={(e) => setRegisterUserName(e.target.value)}
                     />
                     <input
-                        placeholder="Student Password"
+                        placeholder={placeholderPassword}
                         onChange={(e) => setRegisterPassword(e.target.value)}
                     />
                     <button onClick={register}>Submit</button>
@@ -48,11 +53,11 @@ const Login = ({ handleCLose, show, children }) => {
                 <div className='row'>
                     <h1>Login</h1>
                     <input
-                        placeholder="Student Username"
+                        placeholder={placeholderName}
                         onChange={(e) => setLoginUserName(e.target.value)}
                     />
                     <input
-                        placeholder="Student Password"
+                        placeholder={placeholderPassword}
                         onChange={(e) => setLoginPassword(e.target.value)}
                     />
                     <button onClick={login}>Submit</button>
