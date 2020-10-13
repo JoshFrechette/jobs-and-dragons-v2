@@ -67,7 +67,7 @@ module.exports = {
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
-  create: function (req, res) {
+  createAdmin: function (req, res) {
     db.Admin.create(req.body)
       .then(user =>
         res.json({
@@ -77,15 +77,20 @@ module.exports = {
       )
       .catch(err => res.status(422).json(err));
   },
-  findAll: function (req, res) {
+  findAllAdmin: function (req, res) {
     db.Admin.find({})
       .sort({ date: -1 })
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
-  findById: function (req, res) {
+  findByIdAdmin: function (req, res) {
     db.Admin.findById(req.params.id)
       .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err));
+  },
+  updateByIdAdmin: function (req, res) {
+    db.User.findOneAndUpdate({ id: req.params.id }, req.body)
+      .then(user => res.json(user))
       .catch(err => res.status(422).json(err));
   },
 };

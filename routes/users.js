@@ -7,11 +7,21 @@ router
   .get(User.findAll)
   .post(User.create);
 
+router
+  .route('/')
+  .get(User.findAllAdmin)
+  .post(User.createAdmin);
+
 // Matches with "/api/v1/users/:id"
 router
   .route('/id/:id')
   .get(User.findById)
   .put(User.updateById);
+
+router
+  .route('/id/:id')
+  .get(User.findByIdAdmin)
+  .put(User.updateByIdAdmin);
 
 // Matches with "/api/v1/users/:email"
 router
