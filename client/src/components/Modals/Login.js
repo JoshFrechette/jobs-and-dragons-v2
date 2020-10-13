@@ -2,37 +2,59 @@ import React, { useState } from 'react';
 import 'materialize-css/dist/css/materialize.min.css';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import { useUserContext } from '../../contexts/UserContext';
+// import { useUserContext } from '../../contexts/UserContext';
 import { useLoginContext } from '../../contexts/LoginContext';
 
 const Login = () => {
-    const [registerUserName, setRegisterUserName] = useState('');
-    const [registerPassword, setRegisterPassword] = useState('');
-    const [loginUserName, setLoginUserName] = useState('');
-    const [loginPassword, setLoginPassword] = useState('');
+    const [registerStudentName, setRegisterStudentName] = useState('');
+    const [registerStudentPassword, setRegisterStudentPassword] = useState('');
+    const [registerAdminName, setRegisterAdminName] = useState('');
+    const [registerAdminPassword, setRegisterAdminPassword] = useState('');
+
+    const [loginStudentName, setLoginStudentName] = useState('');
+    const [loginStudentPassword, setLoginStudentPassword] = useState('');
+    const [loginAdminName, setLoginAdminName] = useState('');
+    const [loginAdminPassword, setLoginAdminPassword] = useState('');
     const [state, dispatch] = useLoginContext();
-    const register = () => {
+
+    const registerStudent = () => {
         axios({
             method: "post",
             data: {
-                username: registerUserName,
-                password: registerPassword,
+                studentname: registerStudentName,
+                password: registerStudentPassword,
             },
             withCredentials: true,
             url: "http://localhost:4000/register",
         })
             .then((res) => console.log(res));
     };
-    const login = () => {
+
+    const registerAdmin = () => {
+        axios({
+            method: "post",
+            data: {
+                adminname: registerAdminName,
+                password: registerAdminPassword,
+            },
+            withCredentials: true,
+            url: "http://localhost:4000/register",
+        })
+            .then((res) => console.log(res));
+    };
+
+    const loginStudent = () => {
 
     };
 
-    const close = () => dispatch({ type:'close-modal'})
+    const loginAdmin = () => {
 
-    const placeholderName = state.isStudentLogin ? 'Student Username' : "Admin Username";
-    const placeholderPassword = state.isStudentLogin ? 'Student Password' : "Admin Password";
+    };
+
+    const close = () => dispatch({ type:'close-modal' });
 
     return (
+        (state.isStudentLogin ? 
         
         <div style={modal}>
             <section style={modalMain}>
@@ -40,31 +62,64 @@ const Login = () => {
 
                     <h1>Register</h1>
                     <input
-                        placeholder= {placeholderName}
-                        onChange={(e) => setRegisterUserName(e.target.value)}
+                        placeholder = "Student Name"
+                        onChange={(e) => setRegisterStudentName(e.target.value)}
                     />
                     <input
-                        placeholder={placeholderPassword}
-                        onChange={(e) => setRegisterPassword(e.target.value)}
+                        placeholder = "Student Password"
+                        onChange={(e) => setRegisterStudentPassword(e.target.value)}
                     />
-                    <button onClick={register}>Submit</button>
+                    <button onClick={registerStudent}>Submit</button>
                 </div>
 
                 <div className='row'>
                     <h1>Login</h1>
                     <input
-                        placeholder={placeholderName}
-                        onChange={(e) => setLoginUserName(e.target.value)}
+                        placeholder = "Student Name"
+                        onChange={(e) => setLoginStudentName(e.target.value)}
                     />
                     <input
-                        placeholder={placeholderPassword}
-                        onChange={(e) => setLoginPassword(e.target.value)}
+                        placeholder = "Student Password"
+                        onChange={(e) => setLoginStudentPassword(e.target.value)}
                     />
-                    <button onClick={login}>Submit</button>
+                    <button onClick={loginStudent}>Submit</button>
                     <button onClick={close}>Close</button>
                 </div>
             </section>
         </div>
+         : 
+        <div style={modal}>
+            <section style={modalMain}>
+                <div className='row'>
+
+                    <h1>Register</h1>
+                    <input
+                        placeholder = "Admin Name"
+                        onChange={(e) => setRegisterAdminName(e.target.value)}
+                    />
+                    <input
+                        placeholder = "Admin Password"
+                        onChange={(e) => setRegisterAdminPassword(e.target.value)}
+                    />
+                    <button onClick={registerAdmin}>Submit</button>
+                </div>
+
+                <div className='row'>
+                    <h1>Login</h1>
+                    <input
+                        placeholder = "Admin Name"
+                        onChange={(e) => setLoginAdminName(e.target.value)}
+                    />
+                    <input
+                        placeholder = "Admin Password"
+                        onChange={(e) => setLoginAdminPassword(e.target.value)}
+                    />
+                    <button onClick={loginAdmin}>Submit</button>
+                    <button onClick={close}>Close</button>
+                </div>
+            </section>
+        </div>
+        )
     )
 }
 
@@ -87,12 +142,12 @@ const modalMain = {
     transform: 'translate(-50%,-50%)'
 };
 
-const displayBlock = {
-    display: 'block'
-};
+// const displayBlock = {
+//     display: 'block'
+// };
 
-const displayNone = {
-    display: 'none'
-}
+// const displayNone = {
+//     display: 'none'
+// }
 
 export default Login;

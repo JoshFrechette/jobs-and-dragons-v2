@@ -1,18 +1,18 @@
 const db = require('../models');
 
 module.exports = {
-  findAll: function(req, res) {
+  findAll: function (req, res) {
     db.User.find({})
       .sort({ date: -1 })
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
-  findById: function(req, res) {
+  findById: function (req, res) {
     db.User.findById(req.params.id)
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
-  findByEmail: function(req, res) {
+  findByEmail: function (req, res) {
     db.User.findOne({ email: req.params.email })
       .then(user => {
         if (user) {
@@ -27,7 +27,7 @@ module.exports = {
       })
       .catch(err => res.status(422).json(err));
   },
-  create: function(req, res) {
+  create: function (req, res) {
     db.User.create(req.body)
       .then(user =>
         res.json({
@@ -37,34 +37,55 @@ module.exports = {
       )
       .catch(err => res.status(422).json(err));
   },
-  updateById: function(req, res) {
+  updateById: function (req, res) {
     db.User.findOneAndUpdate({ id: req.params.id }, req.body)
       .then(user => res.json(user))
       .catch(err => res.status(422).json(err));
   },
-  updateByEmail: function(req, res) {
+  updateByEmail: function (req, res) {
     db.User.findOneAndUpdate({ email: req.params.email }, req.body)
       .then(user => res.json(user))
       .catch(err => res.status(422).json(err));
   },
-  findOneByEmailDel: function(req, res){
-    db.User.findOneAndUpdate({email: req.params.email}, {$pull: {jobsearch: {id:req.body.id}}},{  new: true})
-    .then(user => res.json(user))
-    .catch(err => res.status(422).json(err));
+  findOneByEmailDel: function (req, res) {
+    db.User.findOneAndUpdate({ email: req.params.email }, { $pull: { jobsearch: { id: req.body.id } } }, { new: true })
+      .then(user => res.json(user))
+      .catch(err => res.status(422).json(err));
   },
-  updateByEmailPush: function(req, res){
-    db.User.findOneAndUpdate({email: req.params.email}, {$push:{jobsearch:req.body}})
-    .then(user => res.json(user))
-    .catch(err => res.status(422).json(err));
+  updateByEmailPush: function (req, res) {
+    db.User.findOneAndUpdate({ email: req.params.email }, { $push: { jobsearch: req.body } })
+      .then(user => res.json(user))
+      .catch(err => res.status(422).json(err));
   },
-  updateByEmailPushCP: function(req, res){
-    db.User.findOneAndUpdate({email: req.params.email}, {$push:{coverpage:req.body}})
-    .then(user => res.json(user))
-    .catch(err => res.status(422).json(err));
+  updateByEmailPushCP: function (req, res) {
+    db.User.findOneAndUpdate({ email: req.params.email }, { $push: { coverpage: req.body } })
+      .then(user => res.json(user))
+      .catch(err => res.status(422).json(err));
   },
-  remove: function(req, res) {
+  remove: function (req, res) {
     db.User.findOneAndDelete({ id: req.params.id })
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
-  }
+  },
+  create: function (req, res) {
+    db.Admin.create(req.body)
+      .then(user =>
+        res.json({
+          success: true,
+          data: user
+        })
+      )
+      .catch(err => res.status(422).json(err));
+  },
+  findAll: function (req, res) {
+    db.Admin.find({})
+      .sort({ date: -1 })
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err));
+  },
+  findById: function (req, res) {
+    db.Admin.findById(req.params.id)
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err));
+  },
 };
