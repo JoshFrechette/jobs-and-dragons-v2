@@ -8,7 +8,7 @@ router
   .post(User.create);
 
 router
-  .route('/')
+  .route('/admin')
   .get(User.findAllAdmin)
   .post(User.createAdmin);
 
@@ -19,7 +19,7 @@ router
   .put(User.updateById);
 
 router
-  .route('/id/:id')
+  .route('/adminid/:id')
   .get(User.findByIdAdmin)
   .put(User.updateByIdAdmin);
 

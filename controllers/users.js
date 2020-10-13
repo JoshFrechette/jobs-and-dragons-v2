@@ -28,7 +28,7 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   create: function (req, res) {
-    db.User.create(req.body)
+    db.User.createUser(req.body)
       .then(user =>
         res.json({
           success: true,
@@ -89,7 +89,7 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   updateByIdAdmin: function (req, res) {
-    db.User.findOneAndUpdate({ id: req.params.id }, req.body)
+    db.Admin.findOneAndUpdate({ id: req.params.id }, req.body)
       .then(user => res.json(user))
       .catch(err => res.status(422).json(err));
   },

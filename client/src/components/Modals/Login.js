@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import 'materialize-css/dist/css/materialize.min.css';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+// import { api } from '../../utils/api';
 // import { useUserContext } from '../../contexts/UserContext';
 import { useLoginContext } from '../../contexts/LoginContext';
 
@@ -15,9 +16,35 @@ const Login = () => {
     const [loginStudentPassword, setLoginStudentPassword] = useState('');
     const [loginAdminName, setLoginAdminName] = useState('');
     const [loginAdminPassword, setLoginAdminPassword] = useState('');
+
     const [state, dispatch] = useLoginContext();
 
     const registerStudent = () => {
+        // api.addUserInfo({
+        //         studentname: registerStudentName,
+        //         password: registerStudentPassword,
+        // })
+
+        // axios.post('/', {
+        //         studentname: registerStudentName,
+        //         password: registerStudentPassword,
+		// })
+		// 	.then(response => {
+		// 		console.log(response.config.data)
+		// 		if (!response.data.errmsg) {
+		// 			console.log('successful signup')
+			// 		this.setState({ //redirect to login page
+			// 			redirectTo: '/login'
+			// 		})
+			// 	} else {
+			// 		console.log('studentname already taken')
+			// 	}
+			// }).catch(error => {
+			// 	console.log('signup error: ')
+			// 	console.log(error)
+
+            // })
+            
         axios({
             method: "post",
             data: {
@@ -25,30 +52,73 @@ const Login = () => {
                 password: registerStudentPassword,
             },
             withCredentials: true,
-            url: "http://localhost:4000/register",
-        })
-            .then((res) => console.log(res));
+            url: "http://localhost:3000/api/v1/users",
+        }).then((res) => console.log(res));
     };
 
     const registerAdmin = () => {
-        axios({
-            method: "post",
-            data: {
-                adminname: registerAdminName,
-                password: registerAdminPassword,
-            },
-            withCredentials: true,
-            url: "http://localhost:4000/register",
+        axios.post('/admin', {
+            adminname: registerAdminName,
+            password: registerAdminPassword,
+    })
+        .then(response => {
+            console.log(response)
+            if (!response.data.errmsg) {
+                console.log('successful signup')
+        // 		this.setState({ //redirect to login page
+        // 			redirectTo: '/login'
+        // 		})
+            } else {
+                console.log('adminname already taken')
+            }
+        }).catch(error => {
+            console.log('signup error: ')
+            console.log(error)
+
         })
-            .then((res) => console.log(res));
     };
 
     const loginStudent = () => {
+        axios.post('/', {
+            studentname: loginStudentName,
+            password: loginStudentPassword,
+    })
+        .then(response => {
+            console.log(response)
+            if (!response.data.errmsg) {
+                console.log('successful signin')
+        // 		this.setState({ //redirect to login page
+        // 			redirectTo: '/login'
+        // 		})
+            // } else {
+            //     console.log('studentname already taken')
+            }
+        }).catch(error => {
+            console.log('signin error: ')
+            console.log(error)
 
+        })
     };
 
     const loginAdmin = () => {
-
+        axios.post('/admin', {
+            adminname: loginAdminName,
+            password: loginAdminPassword,
+    })
+        .then(response => {
+            console.log(response)
+            if (!response.data.errmsg) {
+                console.log('successful signin')
+        // 		this.setState({ //redirect to login page
+        // 			redirectTo: '/login'
+        // 		})
+            // } else {
+            //     console.log('studentname already taken')
+            }
+        }).catch(error => {
+            console.log('signin error: ')
+            console.log(error)
+        })
     };
 
     const close = () => dispatch({ type:'close-modal' });
