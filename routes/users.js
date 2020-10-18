@@ -11,10 +11,10 @@ router
   .route('/register')
   .post(User.create);
 
-router
-  .route('/admin')
-  .get(User.findAllAdmin)
-  .post(User.createAdmin);
+// router
+//   .route('/admin')
+//   .get(User.findAllAdmin)
+//   .post(User.createAdmin);
 
 // Matches with "/api/v1/users/:id"
 router
@@ -22,10 +22,10 @@ router
   .get(User.findById)
   .put(User.updateById);
 
-router
-  .route('/adminid/:id')
-  .get(User.findByIdAdmin)
-  .put(User.updateByIdAdmin);
+// router
+//   .route('/adminid/:id')
+//   .get(User.findByIdAdmin)
+//   .put(User.updateByIdAdmin);
 
 // Matches with "/api/v1/users/:email"
 router

@@ -1,9 +1,11 @@
 const path = require('path');
 const router = require('express').Router();
 const routes = require('./users');
+const routesAdmin = require('./admin');
 
 // API Routes
 router.use('/api/v1/users', routes);
+router.use('/api/v1/admin', routesAdmin);
 
 // If no API routes are hit, send the React app
 router.use(function(req, res) {
