@@ -2,9 +2,12 @@ import React, { useState } from 'react';
 import 'materialize-css/dist/css/materialize.min.css';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-// import { api } from '../../utils/api';
+import { api } from '../../utils/api';
 // import { useUserContext } from '../../contexts/UserContext';
 import { useLoginContext } from '../../contexts/LoginContext';
+
+// Page redirects to be implemented once Connection issues can be resolved. Registration will be done seperately from 
+// logging in, 
 
 const Login = () => {
     const [registerStudentName, setRegisterStudentName] = useState('');
@@ -21,7 +24,7 @@ const Login = () => {
 
     const registerStudent = () => {
         // api.addUserInfo({
-        //         studentname: registerStudentName,
+        //         username: registerStudentName,
         //         password: registerStudentPassword,
         // })
 
@@ -48,17 +51,17 @@ const Login = () => {
         axios({
             method: "post",
             data: {
-                studentname: registerStudentName,
+                username: registerStudentName,
                 password: registerStudentPassword,
             },
             withCredentials: true,
-            url: "http://localhost:3000/api/v1/users",
+            url: "http://localhost:3000/api/v1/users/register",
         }).then((res) => console.log(res));
     };
 
     const registerAdmin = () => {
         axios.post('/admin', {
-            adminname: registerAdminName,
+            username: registerAdminName,
             password: registerAdminPassword,
     })
         .then(response => {

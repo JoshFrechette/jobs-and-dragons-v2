@@ -17,6 +17,8 @@ import { LoginProvider } from './contexts/LoginContext';
 // styles/
 import './App.css';
 
+// PrivateRoutes commented out until logging in issues can be resolved. 
+
 const App = () => {
 
   //   if (loading) {
@@ -35,7 +37,7 @@ const App = () => {
               <Footer />
             </Route>
 
-            <PrivateRoute 
+            {/* <PrivateRoute 
               exact path='/game' 
               component={Game}>
             </PrivateRoute>
@@ -46,7 +48,7 @@ const App = () => {
             <PrivateRoute 
               exact path='/admin' 
               component={AdminPlatform}>
-            </PrivateRoute>
+            </PrivateRoute> */}
 
           </Switch>
         </div>

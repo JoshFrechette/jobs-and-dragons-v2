@@ -1,4 +1,4 @@
-const db = require('../models');
+const db = require('../models/index.js');
 
 module.exports = {
   findAll: function (req, res) {
@@ -28,6 +28,7 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   create: function (req, res) {
+    console.log(req.body, "at controller")
     db.User.createUser(req.body)
       .then(user =>
         res.json({

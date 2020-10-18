@@ -46,6 +46,17 @@ if (process.env.NODE_ENV === 'development') {
 // Add routes, both API and view
 app.use('/', userRoutes);
 
+// Checks against online examples
+// app.post("/login", (req, res) => {
+//   console.log(req.body);
+// });
+
+// app.post("/register", (req, res) => {
+//   console.log(req.body);
+// });
+
+// app.get("/user", (req, res) => {});
+
 app.listen(
   PORT,
   console.log(`Server running in ${process.env.NODE_ENV} mode on port ${PORT}`)

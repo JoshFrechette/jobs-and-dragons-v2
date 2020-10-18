@@ -8,6 +8,10 @@ router
   .post(User.create);
 
 router
+  .route('/register')
+  .post(User.create);
+
+router
   .route('/admin')
   .get(User.findAllAdmin)
   .post(User.createAdmin);

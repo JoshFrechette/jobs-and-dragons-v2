@@ -1,5 +1,6 @@
 export const api = {
   async addUserInfo(userInfo) {
+    console.log(userInfo)
     const res = await fetch('/api/v1/users', {
       method: 'POST',
       headers: {
