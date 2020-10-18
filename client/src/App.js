@@ -36,6 +36,18 @@ const App = () => {
               <Home />
               <Footer />
             </Route>
+            <Route 
+              exact path='/game' 
+              component={Game}
+            ></Route>
+            <Route 
+              exact path='/profile' 
+              component={Profile}
+            ></Route>
+            <Route 
+              exact path='/admin' 
+              component={AdminPlatform}
+            ></Route>
 
             {/* <PrivateRoute 
               exact path='/game' 
