@@ -1,10 +1,10 @@
 var mongoose = require('mongoose');
 
-const AdminSchema = new mongoose.Schema({
-  username: String,
-  password: String,
-  students: []
-});
+// const AdminSchema = new mongoose.Schema({
+//   username: String,
+//   password: String,
+//   students: []
+// });
 
 const UserSchema = new mongoose.Schema({
   username: String,
@@ -47,6 +47,6 @@ const User = mongoose.model('User', UserSchema);
 // const Admin = mongoose.model('Admin', AdminSchema);
 
 // module.exports = { User, Admin };
-module.exports = { User };
+module.exports =  User;
 
 // module.exports = ("User", UserSchema);

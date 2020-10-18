@@ -29,7 +29,7 @@ module.exports = {
   },
   create: function (req, res) {
     console.log(req.body, "at controller")
-    db.User.createUser(req.body)
+    db.User.create(req.body)
       .then(user =>
         res.json({
           success: true,
