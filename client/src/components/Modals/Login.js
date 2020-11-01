@@ -10,11 +10,12 @@ import { useLoginContext } from '../../contexts/LoginContext';
 // logging in, 
 
 const Login = () => {
+    // registering states
     const [registerStudentName, setRegisterStudentName] = useState('');
     const [registerStudentPassword, setRegisterStudentPassword] = useState('');
     const [registerAdminName, setRegisterAdminName] = useState('');
     const [registerAdminPassword, setRegisterAdminPassword] = useState('');
-
+    // logging in states
     const [loginStudentName, setLoginStudentName] = useState('');
     const [loginStudentPassword, setLoginStudentPassword] = useState('');
     const [loginAdminName, setLoginAdminName] = useState('');
@@ -22,6 +23,8 @@ const Login = () => {
 
     const [state, dispatch] = useLoginContext();
 
+
+    // Registering functions
     const registerStudent = () => {
         // api.addUserInfo({
         //         username: registerStudentName,
@@ -60,30 +63,40 @@ const Login = () => {
     };
 
     const registerAdmin = () => {
-        axios.post('/admin', {
-            username: registerAdminName,
-            password: registerAdminPassword,
-    })
-        .then(response => {
-            console.log(response)
-            if (!response.data.errmsg) {
-                console.log('successful signup')
+        axios({
+            method: "post",
+            data: {
+                username: registerAdminName,
+                password: registerAdminPassword,
+            },
+            withCredentials: true,
+            url: "http://localhost:3000/api/v1/admin/register",
+        }).then((res) => console.log(res));
+    //     axios.post('/admin', {
+    //         username: registerAdminName,
+    //         password: registerAdminPassword,
+    // })
+    //     .then(response => {
+    //         console.log(response)
+    //         if (!response.data.errmsg) {
+    //             console.log('successful signup')
         // 		this.setState({ //redirect to login page
         // 			redirectTo: '/login'
         // 		})
-            } else {
-                console.log('adminname already taken')
-            }
-        }).catch(error => {
-            console.log('signup error: ')
-            console.log(error)
+        //     } else {
+        //         console.log('adminname already taken')
+        //     }
+        // }).catch(error => {
+        //     console.log('signup error: ')
+        //     console.log(error)
 
-        })
+        // })
     };
 
+    // Logging in functions
     const loginStudent = () => {
         axios.post('/', {
-            studentname: loginStudentName,
+            username: loginStudentName,
             password: loginStudentPassword,
     })
         .then(response => {

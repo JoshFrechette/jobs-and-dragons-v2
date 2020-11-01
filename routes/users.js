@@ -33,7 +33,7 @@ router
   .get(User.findByEmail)
   .put(User.updateByEmail);
 
-  // Matches with "/api/v1/users/emailjs"
+// Matches with "/api/v1/users/emailjs"
 router
 .route('/emailjs/:email')
 .put(User.updateByEmailPush);
@@ -41,6 +41,7 @@ router
 router
 .route('/emailcp/:email')
 .put(User.updateByEmailPushCP);
+
 // matches with "/api/v1/users/emaildj"
 router
 .route('/emaildj/:email')

@@ -30,7 +30,6 @@ const App = () => {
       <div id='app'>
         <div className='row'>
           <Switch>
-
             <Route>
               <NavBar />
               <Home />

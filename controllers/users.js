@@ -1,19 +1,19 @@
-const db = require('../models/index.js');
+const db = require('./../models/index');
 
 module.exports = {
   findAll: function (req, res) {
-    db.User.find({})
+    db.User.User.find({})
       .sort({ date: -1 })
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
   findById: function (req, res) {
-    db.User.findById(req.params.id)
+    db.User.User.findById(req.params.id)
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
   findByEmail: function (req, res) {
-    db.User.findOne({ email: req.params.email })
+    db.User.User.findOne({ email: req.params.email })
       .then(user => {
         if (user) {
           return res.json({
@@ -28,12 +28,13 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   create: function (req, res) {
+    console.log(db.User)
     console.log(req.body, "at controller")
-    db.User.create(req.body)
+    db.User.User.create(req.body)
       .then(user =>
         res.json({
           success: true,
-          data: user
+          data: user,
         })
       )
       .catch(err => res.status(422).json(err));
@@ -69,7 +70,8 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   createAdmin: function (req, res) {
-    db.Admin.create(req.body)
+    console.log(db, "at admin controller")
+    db.User.Admin.create(req.body)
       .then(user =>
         res.json({
           success: true,
@@ -79,18 +81,18 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   findAllAdmin: function (req, res) {
-    db.Admin.find({})
+    db.User.Admin.find({})
       .sort({ date: -1 })
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
   findByIdAdmin: function (req, res) {
-    db.Admin.findById(req.params.id)
+    db.User.Admin.findById(req.params.id)
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
   updateByIdAdmin: function (req, res) {
-    db.Admin.findOneAndUpdate({ id: req.params.id }, req.body)
+    db.User.Admin.findOneAndUpdate({ id: req.params.id }, req.body)
       .then(user => res.json(user))
       .catch(err => res.status(422).json(err));
   },

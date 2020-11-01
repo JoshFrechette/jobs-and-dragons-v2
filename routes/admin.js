@@ -2,10 +2,10 @@ const router = require('express').Router();
 const Admin = require('../controllers/admin');
 
 // Matches with "/api/v1/admin"
-// router
-//   .route('/')
-//   .get(User.findAll)
-//   .post(User.create);
+router
+  .route('/')
+  .get(Admin.findAll)
+  .post(Admin.create);
 
   router
   .route('/admin')
