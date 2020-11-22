@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
 const footerStyle = {
-  bottom: 0,
-  position: 'relative',
+  // bottom: 0,
+  position: 'absolute',
   width: '100%',
   background: '#333',
   color: '#fff',

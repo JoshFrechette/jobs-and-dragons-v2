@@ -25,16 +25,7 @@ const NavBar = () => {
     dispatch({  type: 'student'})
     console.log(state)
   }
-
-  // const handleAdminLogin = () => {
-  //    dispatch({  type: 'admin'})
-  //   console.log(state)
-  // }
-
-  // useEffect(() => {
-  //   setIsLoginModal(state.isLoginModal);
-  // }, [state.isLoginModal]);
-  
+    
   return (
     <nav>
       <div className='nav-wrapper grey darken-4'>

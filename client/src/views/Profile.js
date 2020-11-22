@@ -10,89 +10,94 @@ import 'materialize-css';
 import ProgressBarExample from '../components/progressBar/index';
 import Questmap from '../components/Questmap';
 import Loading from '../components/Loading';
-import { useAuth0 } from '../react-auth0-spa';
+// import { useAuth0 } from '../react-auth0-spa';
 import { Row, Col } from 'react-materialize';
 
 const Profile = () => {
   // const { loading, user } = useAuth0();
+  const loading = true;
   const [state, dispatch] = useUserContext();
   const [isLoading, setIsLoading] = useState(true);
+  // temporary user object
+  const user = {
 
-  // useEffect(() => {
-    // if (loading || !user) {
-    //   return <Loading />;
-    // }
+  }
 
-    // api.getUserInfo(user.email).then((result) => {
-      // if (result.success) {
-      //   dispatch({ type: 'user', payload: result.data });
-      //   setIsLoading(false);
-      // } else {
-  //       setIsLoading(true);
-  //       let newUser = {
-  //         name: '',
-  //         email: '',
-  //         picture: '',
-  //         progressTracker: {
-  //           quest1: false,
-  //           quest2: false,
-  //           quest3: false,
-  //         },
-  //         gamestats: {
-  //           publicRepos: 0,
-  //           followers: 0,
-  //           numOfStars: 0,
-  //           jp: 20,
-  //           speed: 75,
-  //         },
-  //         inventory: {
-  //           scroll: false,
-  //           bow: false,
-  //         },
-  //         experience: [],
-  //         education: [],
-  //         skills: [],
-  //         projects: [],
-  //         expertise: [],
-  //         jobsearch: [],
-  //       };
-  //       newUser.name = user.name;
-  //       newUser.email = user.email;
-  //       newUser.picture = user.picture;
+  useEffect(() => {
+    if (loading || !user) {
+      return <Loading />;
+    }
 
-  //       window
-  //         .fetch(`https://api.github.com/users/${user.nickname}`)
-  //         .then((res) => res.json())
-  //         .then((res) => {
-  //           newUser.gamestats.publicRepos = res['public_repos'];
-  //           newUser.gamestats.followers = res['followers'];
-  //           return newUser;
-  //         })
-  //         .then((newUser) => {
-  //           window
-  //             .fetch(`https://api.github.com/users/${user.nickname}/repos`)
-  //             .then((res) => res.json())
-  //             .then((res) => {
-  //               const numOfStars = res.reduce((acc, repo) => {
-  //                 return acc + repo['stargazers_count'];
-  //               }, 0);
-  //               newUser.gamestats.numOfStars = numOfStars;
-  //               return newUser;
-  //             })
-  //             .then((newUser) => {
-  //               api.addUserInfo(newUser).then((result) => {
-  //                 if (result.success) {
-  //                   dispatch({ type: 'user', payload: result.data });
-  //                   setIsLoading(false);
-  //                 }
-  //               });
-  //             });
-  //         });
-  //     // }
-  //   });
-  // }, [loading, user, dispatch]);
+    api.getUserInfo(user.email).then((result) => {
+      if (result.success) {
+        dispatch({ type: 'user', payload: result.data });
+        setIsLoading(false);
+      } else {
+        setIsLoading(true);
+        let newUser = {
+          name: '',
+          email: '',
+          picture: '',
+          progressTracker: {
+            quest1: false,
+            quest2: false,
+            quest3: false,
+          },
+          gamestats: {
+            publicRepos: 0,
+            followers: 0,
+            numOfStars: 0,
+            jp: 20,
+            speed: 75,
+          },
+          inventory: {
+            scroll: false,
+            bow: false,
+          },
+          experience: [],
+          education: [],
+          skills: [],
+          projects: [],
+          expertise: [],
+          jobsearch: [],
+        };
+        newUser.name = user.name;
+        newUser.email = user.email;
+        newUser.picture = user.picture;
 
-  // const questState = state.user.progressTracker;
+        window
+          .fetch(`https://api.github.com/users/${user.nickname}`)
+          .then((res) => res.json())
+          .then((res) => {
+            newUser.gamestats.publicRepos = res['public_repos'];
+            newUser.gamestats.followers = res['followers'];
+            return newUser;
+          })
+          .then((newUser) => {
+            window
+              .fetch(`https://api.github.com/users/${user.nickname}/repos`)
+              .then((res) => res.json())
+              .then((res) => {
+                const numOfStars = res.reduce((acc, repo) => {
+                  return acc + repo['stargazers_count'];
+                }, 0);
+                newUser.gamestats.numOfStars = numOfStars;
+                return newUser;
+              })
+              .then((newUser) => {
+                api.addUserInfo(newUser).then((result) => {
+                  if (result.success) {
+                    dispatch({ type: 'user', payload: result.data });
+                    setIsLoading(false);
+                  }
+                });
+              });
+          });
+      }
+    });
+  }, [loading, user, dispatch]);
+
+  const questState = state.user.progressTracker;
 
   return (
     <>
@@ -132,7 +137,7 @@ const Profile = () => {
           </div>
 
           {/* Quest 1 Description  */}
-          {/* {!questState.quest1 && !questState.quest2 && !questState.quest3 ? (
+          {!questState.quest1 && !questState.quest2 && !questState.quest3 ? (
             <div
               className='center col s12 m6'
               style={{ marginTop: '50px' }}
@@ -171,10 +176,10 @@ const Profile = () => {
               </div>
             </div>
           ) : (
-            ''
-          )}
+              ''
+            )}
 
-          {/* Quest 2 Description  
+          {/* Quest 2 Description */}
           {questState.quest1 && !questState.quest2 && !questState.quest3 ? (
             <div
               className='center col s12 m6'
@@ -213,10 +218,10 @@ const Profile = () => {
               </div>
             </div>
           ) : (
-            ''
-          )}
+              ''
+            )}
 
-          {/* Quest 3 Description  
+          {/* Quest 3 Description */}
           {questState.quest1 && questState.quest2 && !questState.quest3 ? (
             <div
               className='center col s12 m6'
@@ -257,10 +262,10 @@ const Profile = () => {
               </div>
             </div>
           ) : (
-            ''
-          )}
+              ''
+            )}
 
-          {/* ALL QUEST COMPLETED - After 3rd Quest  
+          {/* ALL QUEST COMPLETED - After 3rd Quest  */}
           {questState.quest1 && questState.quest2 && questState.quest3 ? (
             <div
               className='center col s12 m6'
@@ -296,8 +301,8 @@ const Profile = () => {
               </div>
             </div>
           ) : (
-            ''
-          )} 
+              ''
+            )}
         </div>
         <div className='row'>
           <div style={PageStyles}>
@@ -308,7 +313,7 @@ const Profile = () => {
               </Col>
               <Col s={1} />
             </Row>
-          </div>*/}
+          </div>
         </div>
       </div>
     </>
@@ -322,6 +327,7 @@ const GameBoxStyles = {
 };
 
 const profileStyle = {
+  position: 'relative',
   height: '100%',
   width: '100%',
   backgroundImage: `url(${background})`,

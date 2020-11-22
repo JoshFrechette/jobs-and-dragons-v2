@@ -34,23 +34,23 @@ const Login = () => {
         // axios.post('/', {
         //         studentname: registerStudentName,
         //         password: registerStudentPassword,
-		// })
-		// 	.then(response => {
-		// 		console.log(response.config.data)
-		// 		if (!response.data.errmsg) {
-		// 			console.log('successful signup')
-			// 		this.setState({ //redirect to login page
-			// 			redirectTo: '/login'
-			// 		})
-			// 	} else {
-			// 		console.log('studentname already taken')
-			// 	}
-			// }).catch(error => {
-			// 	console.log('signup error: ')
-			// 	console.log(error)
+        // })
+        // 	.then(response => {
+        // 		console.log(response.config.data)
+        // 		if (!response.data.errmsg) {
+        // 			console.log('successful signup')
+        // 		this.setState({ //redirect to login page
+        // 			redirectTo: '/login'
+        // 		})
+        // 	} else {
+        // 		console.log('studentname already taken')
+        // 	}
+        // }).catch(error => {
+        // 	console.log('signup error: ')
+        // 	console.log(error)
 
-            // })
-            
+        // })
+
         axios({
             method: "post",
             data: {
@@ -62,97 +62,43 @@ const Login = () => {
         }).then((res) => console.log(res));
     };
 
-    const registerAdmin = () => {
-        axios({
-            method: "post",
-            data: {
-                username: registerAdminName,
-                password: registerAdminPassword,
-            },
-            withCredentials: true,
-            url: "http://localhost:3000/api/v1/admin/register",
-        }).then((res) => console.log(res));
-    //     axios.post('/admin', {
-    //         username: registerAdminName,
-    //         password: registerAdminPassword,
-    // })
-    //     .then(response => {
-    //         console.log(response)
-    //         if (!response.data.errmsg) {
-    //             console.log('successful signup')
-        // 		this.setState({ //redirect to login page
-        // 			redirectTo: '/login'
-        // 		})
-        //     } else {
-        //         console.log('adminname already taken')
-        //     }
-        // }).catch(error => {
-        //     console.log('signup error: ')
-        //     console.log(error)
-
-        // })
-    };
-
     // Logging in functions
     const loginStudent = () => {
         axios.post('/', {
             username: loginStudentName,
             password: loginStudentPassword,
-    })
-        .then(response => {
-            console.log(response)
-            if (!response.data.errmsg) {
-                console.log('successful signin')
-        // 		this.setState({ //redirect to login page
-        // 			redirectTo: '/login'
-        // 		})
-            // } else {
-            //     console.log('studentname already taken')
-            }
-        }).catch(error => {
-            console.log('signin error: ')
-            console.log(error)
-
         })
+            .then(response => {
+                console.log(response)
+                if (!response.data.errmsg) {
+                    console.log('successful signin')
+                    // 		this.setState({ //redirect to login page
+                    // 			redirectTo: '/login'
+                    // 		})
+                    // } else {
+                    //     console.log('studentname already taken')
+                }
+            }).catch(error => {
+                console.log('signin error: ')
+                console.log(error)
+
+            })
     };
 
-    const loginAdmin = () => {
-        axios.post('/admin', {
-            adminname: loginAdminName,
-            password: loginAdminPassword,
-    })
-        .then(response => {
-            console.log(response)
-            if (!response.data.errmsg) {
-                console.log('successful signin')
-        // 		this.setState({ //redirect to login page
-        // 			redirectTo: '/login'
-        // 		})
-            // } else {
-            //     console.log('studentname already taken')
-            }
-        }).catch(error => {
-            console.log('signin error: ')
-            console.log(error)
-        })
-    };
-
-    const close = () => dispatch({ type:'close-modal' });
+    const close = () => dispatch({ type: 'close-modal' });
 
     return (
-        (state.isStudentLogin ? 
-        
         <div style={modal}>
             <section style={modalMain}>
                 <div className='row'>
 
                     <h1>Register</h1>
                     <input
-                        placeholder = "Student Name"
+                        placeholder="Student Name"
                         onChange={(e) => setRegisterStudentName(e.target.value)}
                     />
                     <input
-                        placeholder = "Student Password"
+                        placeholder="Student Password"
                         onChange={(e) => setRegisterStudentPassword(e.target.value)}
                     />
                     <button onClick={registerStudent}>Submit</button>
@@ -161,11 +107,11 @@ const Login = () => {
                 <div className='row'>
                     <h1>Login</h1>
                     <input
-                        placeholder = "Student Name"
+                        placeholder="Student Name"
                         onChange={(e) => setLoginStudentName(e.target.value)}
                     />
                     <input
-                        placeholder = "Student Password"
+                        placeholder="Student Password"
                         onChange={(e) => setLoginStudentPassword(e.target.value)}
                     />
                     <button onClick={loginStudent}>Submit</button>
@@ -173,39 +119,7 @@ const Login = () => {
                 </div>
             </section>
         </div>
-         : 
-        <div style={modal}>
-            <section style={modalMain}>
-                <div className='row'>
 
-                    <h1>Register</h1>
-                    <input
-                        placeholder = "Admin Name"
-                        onChange={(e) => setRegisterAdminName(e.target.value)}
-                    />
-                    <input
-                        placeholder = "Admin Password"
-                        onChange={(e) => setRegisterAdminPassword(e.target.value)}
-                    />
-                    <button onClick={registerAdmin}>Submit</button>
-                </div>
-
-                <div className='row'>
-                    <h1>Login</h1>
-                    <input
-                        placeholder = "Admin Name"
-                        onChange={(e) => setLoginAdminName(e.target.value)}
-                    />
-                    <input
-                        placeholder = "Admin Password"
-                        onChange={(e) => setLoginAdminPassword(e.target.value)}
-                    />
-                    <button onClick={loginAdmin}>Submit</button>
-                    <button onClick={close}>Close</button>
-                </div>
-            </section>
-        </div>
-        )
     )
 }
 

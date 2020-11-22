@@ -1,21 +1,29 @@
 var mongoose = require('mongoose');
 
-const AdminSchema = new mongoose.Schema({
-  username: String,
-  password: String,
-  students: []
-});
-
 const UserSchema = new mongoose.Schema({
   username: String,
   password: String,
+  email: String,
+  progressTracker: {
+    quest1: {
+      dateSubmitted: String,
+      approved: false
+    },
+    quest2: {
+      dateSubmitted: String,
+      approved: false
+    },
+    quest2: {
+      dateSubmitted: String,
+      approved: false
+    }
+  }
 });
 
 // const UserSchema = new mongoose.Schema({
 //   studentname: String,
 //   password: String,
 //   picture: String,
-//   email: String,
 //   name: String,
 //   phone: Number,
 //   email: String,
@@ -44,9 +52,8 @@ const UserSchema = new mongoose.Schema({
 // });
 
 const User = mongoose.model('User', UserSchema);
-const Admin = mongoose.model('Admin', AdminSchema);
 
-module.exports = { User, Admin };
-// module.exports =  User;
+// module.exports = { User, Admin };
+module.exports =  User;
 
 // module.exports = ("User", UserSchema);
