@@ -25,7 +25,12 @@ const NavBar = () => {
     dispatch({  type: 'student'})
     console.log(state)
   }
-    
+
+  const handleStudentLogout = () => {
+    dispatch({  type: 'loggedOut'})
+    console.log(state)
+  }
+
   return (
     <nav>
       <div className='nav-wrapper grey darken-4'>
@@ -38,31 +43,33 @@ const NavBar = () => {
           />
         </a>
         <ul className='right'>
-          <li to='/'>
+          <li>
             <Link to='/'>
               <h5>HOME</h5>
             </Link>
           </li>
+          {!state.isLoggedIn ? (
           <li to='/profile'
             id='studentLoginBtn'
             onClick={handleStudentLogin}
             // status={isStudentLogin}
             // onClick={() => setIsStudentLogin(true)}
           >
-            <Link to='/profile'>
+            {/* <Link to='/profile'> */}
               <h5>STUDENT LOGIN</h5>
-            </Link>
+            {/* </Link> */}
           </li>
-          {/* <li to='/'
-            id='adminLoginBtn'
-            onClick={handleAdminLogin}
-            // status={isAdminLogin}
-            >
-            
-            <Link to='/'>
-              <h5>ADMIN LOGIN</h5>
-            </Link>
-          </li> */}
+          ) : (
+            <li to='/'
+            id='studentLoginBtn'
+            onClick={handleStudentLogout}
+            // status={isStudentLogin}
+            // onClick={() => setIsStudentLogin(true)}
+          >
+              <h5>STUDENT LOGOUT</h5>
+          </li>
+          )}
+      
           {/* {!isOpen ? (
             <>
             <li

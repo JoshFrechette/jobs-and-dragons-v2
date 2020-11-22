@@ -1,8 +1,8 @@
-import React, { 
-    createContext, 
-    useReducer, 
+import React, {
+    createContext,
+    useReducer,
     useContext,
-    useDispatch, 
+    useDispatch,
 } from 'react';
 
 const LoginContext = createContext();
@@ -14,22 +14,23 @@ const loginReducer = (state, action) => {
             return {
                 isOpen: true,
                 isStudentLogin: true,
-                isAdminLogin: false
-            };
-        case 'admin':
-            return {
-                isOpen: true,
-                isAdminLogin: true,
-                isStudentLogin: false
             };
         case 'close-modal':
             return {
                 isOpen: false
             }
-        default: 
+        case 'loggedIn':
             return {
-            ...state,
-        };
+                isLoggedIn: true
+            }
+        case 'loggedOut':
+            return {
+                isLoggedIn: false
+            }
+        default:
+            return {
+                ...state,
+            };
     }
 };
 
@@ -37,14 +38,14 @@ const LoginProvider = ({
     value = {
         isOpen: false,
         isStudentLogin: false,
-        isAdminLogin: false
+        isLoggedIn: false,
     },
 
     ...props
 }) => {
     const [state, dispatch] = useReducer(loginReducer, { ...value })
 
-    return <Provider value={[state, dispatch]} {...props}/>
+    return <Provider value={[state, dispatch]} {...props} />
 };
 
 const useLoginContext = () => {

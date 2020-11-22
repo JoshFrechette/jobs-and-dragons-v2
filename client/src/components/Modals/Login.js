@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import 'materialize-css/dist/css/materialize.min.css';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import axios from 'axios';
 import { api } from '../../utils/api';
 // import { useUserContext } from '../../contexts/UserContext';
@@ -10,47 +10,19 @@ import { useLoginContext } from '../../contexts/LoginContext';
 // logging in, 
 
 const Login = () => {
+    const history = useHistory();
     // registering states
     const [registerStudentName, setRegisterStudentName] = useState('');
     const [registerStudentPassword, setRegisterStudentPassword] = useState('');
-    const [registerAdminName, setRegisterAdminName] = useState('');
-    const [registerAdminPassword, setRegisterAdminPassword] = useState('');
     // logging in states
     const [loginStudentName, setLoginStudentName] = useState('');
     const [loginStudentPassword, setLoginStudentPassword] = useState('');
-    const [loginAdminName, setLoginAdminName] = useState('');
-    const [loginAdminPassword, setLoginAdminPassword] = useState('');
 
     const [state, dispatch] = useLoginContext();
 
 
     // Registering functions
     const registerStudent = () => {
-        // api.addUserInfo({
-        //         username: registerStudentName,
-        //         password: registerStudentPassword,
-        // })
-
-        // axios.post('/', {
-        //         studentname: registerStudentName,
-        //         password: registerStudentPassword,
-        // })
-        // 	.then(response => {
-        // 		console.log(response.config.data)
-        // 		if (!response.data.errmsg) {
-        // 			console.log('successful signup')
-        // 		this.setState({ //redirect to login page
-        // 			redirectTo: '/login'
-        // 		})
-        // 	} else {
-        // 		console.log('studentname already taken')
-        // 	}
-        // }).catch(error => {
-        // 	console.log('signup error: ')
-        // 	console.log(error)
-
-        // })
-
         axios({
             method: "post",
             data: {
@@ -71,12 +43,14 @@ const Login = () => {
             .then(response => {
                 console.log(response)
                 if (!response.data.errmsg) {
+                    dispatch({ type: 'loggedIn' })
+                    history.push('/profile')
                     console.log('successful signin')
-                    // 		this.setState({ //redirect to login page
-                    // 			redirectTo: '/login'
-                    // 		})
-                    // } else {
-                    //     console.log('studentname already taken')
+                    		// this.setState({ //redirect to profile page
+                    		// 	redirectTo: '/profile'
+                    		// })
+                    } else {
+                        console.log('studentname already taken')
                 }
             }).catch(error => {
                 console.log('signin error: ')
