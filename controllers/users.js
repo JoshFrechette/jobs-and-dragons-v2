@@ -70,7 +70,7 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   createAdmin: function (req, res) {
-    console.log(db, "at admin controller")
+    console.log(db, "at")
     db.User.Admin.create(req.body)
       .then(user =>
         res.json({

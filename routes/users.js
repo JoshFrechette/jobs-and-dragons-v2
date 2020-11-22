@@ -11,6 +11,9 @@ router
   .route('/register')
   .post(User.create);
 
+router 
+  .route('/profile');
+
 // router
 //   .route('/admin')
 //   .get(User.findAllAdmin)

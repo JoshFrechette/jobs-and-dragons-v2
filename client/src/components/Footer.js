@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
 const footerStyle = {
+  bottom: 0,
   position: 'relative',
   width: '100%',
   background: '#333',
@@ -18,7 +19,7 @@ function Footer() {
   });
 
   let location = useLocation();
-
+// Tjis whole bit will probably be unnecessary
   useEffect(() => {
     if (location.pathname === '/resume') {
       const footer = document.getElementById('footer');

@@ -29,24 +29,19 @@ const App = () => {
     <LoginProvider>
       <div id='app'>
         <div className='row'>
+        <NavBar />
           <Switch>
-            <Route>
-              <NavBar />
-              <Home />
-              <Footer />
-            </Route>
-            <Route 
+
+              <Route exact path='/' component={Home} />
+              <Route 
               exact path='/game' 
               component={Game}
             ></Route>
             <Route 
-              exact path='/profile' 
+              path='/profile' 
               component={Profile}
             ></Route>
-            <Route 
-              exact path='/admin' 
-              component={AdminPlatform}
-            ></Route>
+
 
             {/* <PrivateRoute 
               exact path='/game' 
@@ -62,6 +57,7 @@ const App = () => {
             </PrivateRoute> */}
 
           </Switch>
+          <Footer />
         </div>
         {/* {isAuthenticated ? <Footer /> : null} */}
       </div>

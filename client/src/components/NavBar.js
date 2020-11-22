@@ -26,10 +26,10 @@ const NavBar = () => {
     console.log(state)
   }
 
-  const handleAdminLogin = () => {
-     dispatch({  type: 'admin'})
-    console.log(state)
-  }
+  // const handleAdminLogin = () => {
+  //    dispatch({  type: 'admin'})
+  //   console.log(state)
+  // }
 
   // useEffect(() => {
   //   setIsLoginModal(state.isLoginModal);
@@ -52,17 +52,17 @@ const NavBar = () => {
               <h5>HOME</h5>
             </Link>
           </li>
-          <li to='/'
+          <li to='/profile'
             id='studentLoginBtn'
             onClick={handleStudentLogin}
             // status={isStudentLogin}
             // onClick={() => setIsStudentLogin(true)}
           >
-            <Link to='/'>
+            <Link to='/profile'>
               <h5>STUDENT LOGIN</h5>
             </Link>
           </li>
-          <li to='/'
+          {/* <li to='/'
             id='adminLoginBtn'
             onClick={handleAdminLogin}
             // status={isAdminLogin}
@@ -71,7 +71,7 @@ const NavBar = () => {
             <Link to='/'>
               <h5>ADMIN LOGIN</h5>
             </Link>
-          </li>
+          </li> */}
           {/* {!isOpen ? (
             <>
             <li
