@@ -34,12 +34,6 @@ const Home = (props) => {
               <p>{state.isStudentLogin}</p>
             </Login>
           ) : null}
-
-          {/* <div style={loginStyle}>
-            <h4>Guest Login</h4>
-            <p>Email: jobsanddragons@gmail.com</p>
-            <p>Password: J&Dteam2020</p>
-          </div> */}
           <div className='container'>
             <img
               style={brandLogoStyle}

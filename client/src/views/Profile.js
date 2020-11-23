@@ -130,6 +130,7 @@ const Profile = () => {
                 </div>
 
                 <div className='row valign-wrapper'>
+                  {/* <ProgressBarExample /> */}
                   {!isLoading ? <ProgressBarExample /> : null}
                 </div>
               </div>

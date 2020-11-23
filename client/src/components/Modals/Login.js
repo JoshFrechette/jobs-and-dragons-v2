@@ -44,8 +44,8 @@ const Login = () => {
                 console.log(response)
                 if (!response.data.errmsg) {
                     dispatch({ type: 'loggedIn' })
-                    history.push('/profile')
-                    console.log('successful signin')
+                    // history.push('/profile')
+                    console.log(state, 'successful signin')
                     		// this.setState({ //redirect to profile page
                     		// 	redirectTo: '/profile'
                     		// })
@@ -55,7 +55,6 @@ const Login = () => {
             }).catch(error => {
                 console.log('signin error: ')
                 console.log(error)
-
             })
     };
 

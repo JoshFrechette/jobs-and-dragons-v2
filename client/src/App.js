@@ -2,13 +2,12 @@ import React, { useState, useContext, useReducer } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import 'materialize-css';
 
-import PrivateRoute from './components/PrivateRoute';
-import Loading from './components/Loading';
+// import PrivateRoute from './components/PrivateRoute';
+// import Loading from './components/Loading';
 import NavBar from './components/NavBar';
 import Footer from './components/Footer';
 import Home from './views/Home';
 import Profile from './views/Profile';
-import AdminPlatform from './views/AdminPlatform';
 import Game from './views/Game';
 import { LoginProvider } from './contexts/LoginContext';
 
@@ -16,8 +15,6 @@ import { LoginProvider } from './contexts/LoginContext';
 
 // styles/
 import './App.css';
-
-// PrivateRoutes commented out until logging in issues can be resolved. 
 
 const App = () => {
 
@@ -29,37 +26,14 @@ const App = () => {
     <LoginProvider>
       <div id='app'>
         <div className='row'>
-        <NavBar />
+          <NavBar />
           <Switch>
-
-              <Route exact path='/' component={Home} />
-              <Route 
-              exact path='/game' 
-              component={Game}
-            ></Route>
-            <Route 
-              path='/profile' 
-              component={Profile}
-            ></Route>
-
-
-            {/* <PrivateRoute 
-              exact path='/game' 
-              component={Game}>
-            </PrivateRoute>
-            <PrivateRoute 
-              exact path='/profile' 
-              component={Profile}>
-            </PrivateRoute>
-            <PrivateRoute 
-              exact path='/admin' 
-              component={AdminPlatform}>
-            </PrivateRoute> */}
-
+            <Route exact path='/' component={Home} />
+            <Route exact path='/game' component={Game} />
+            <Route exact path='/profile' component={Profile} />
           </Switch>
           <Footer />
         </div>
-        {/* {isAuthenticated ? <Footer /> : null} */}
       </div>
     </LoginProvider>
   );

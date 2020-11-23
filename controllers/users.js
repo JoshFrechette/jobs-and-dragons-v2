@@ -28,8 +28,6 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   create: function (req, res) {
-    console.log(db.User)
-    console.log(req.body, "at controller")
     db.User.User.create(req.body)
       .then(user =>
         res.json({

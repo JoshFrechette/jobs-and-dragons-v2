@@ -11,9 +11,6 @@ router
   .route('/register')
   .post(User.create);
 
-router 
-  .route('/profile');
-
 // Matches with "/api/v1/users/:id"
 router
   .route('/id/:id')

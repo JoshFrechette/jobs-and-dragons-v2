@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useContext, useReducer } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import 'materialize-css';
 import Login from './Modals/Login';
-import{ useUserContext} from '../contexts/UserContext';
+import { useUserContext } from '../contexts/UserContext';
 import { useLoginContext } from '../contexts/LoginContext';
 import logo from '../assets/J&D_Logo_BG_K.png';
 import { SettingsPowerRounded } from '@material-ui/icons';
@@ -10,26 +10,21 @@ import { SettingsPowerRounded } from '@material-ui/icons';
 const NavBar = () => {
   // const [state, dispatch] = useUserContext();
   const [state, dispatch] = useLoginContext();
-
+  const history = useHistory();
   // All content commented out may be needed later for reimplementation of passport login
 
-  // const { isAuthenticated, loginWithRedirect, logout } = useAuth0();
-  // const toggle = () => setIsOpen(!isOpen);
-
-  // const logoutWithRedirect = () =>
-  //   logout({
-  //     returnTo: window.location.origin,
-  //   });
-
   const handleStudentLogin = () => {
-    dispatch({  type: 'student'})
-    console.log(state)
+    dispatch({ type: 'student' })
   }
 
   const handleStudentLogout = () => {
-    dispatch({  type: 'loggedOut'})
-    console.log(state)
+    dispatch({ type: 'loggedOut' });
+    history.push('/');
   }
+
+  useEffect(()=> {
+    console.log(state)
+  }, [])
 
   return (
     <nav>
@@ -49,72 +44,23 @@ const NavBar = () => {
             </Link>
           </li>
           {!state.isLoggedIn ? (
-          <li to='/profile'
-            id='studentLoginBtn'
-            onClick={handleStudentLogin}
-            // status={isStudentLogin}
-            // onClick={() => setIsStudentLogin(true)}
-          >
-            {/* <Link to='/profile'> */}
-              <h5>STUDENT LOGIN</h5>
-            {/* </Link> */}
-          </li>
-          ) : (
-            <li to='/'
-            id='studentLoginBtn'
-            onClick={handleStudentLogout}
-            // status={isStudentLogin}
-            // onClick={() => setIsStudentLogin(true)}
-          >
-              <h5>STUDENT LOGOUT</h5>
-          </li>
-          )}
-      
-          {/* {!isOpen ? (
-            <>
             <li
-              to='/'
-              id='qsLoginBtn'
-              onClick={() => {
-                loginWithRedirect({});
-              }}
+              id='studentLoginBtn'
+              onClick={handleStudentLogin}
             >
-              <Link to='/'>
+              <Link>
                 <h5>STUDENT LOGIN</h5>
               </Link>
             </li>
-            <li
-              to='/'
-              id='qsLoginBtn'
-              onClick={() => {
-                loginWithRedirect({});
-              }}
-            >
-              <Link to='/'>
-                <h5>ADMIN LOGIN</h5>
-              </Link>
-            </li>
-            </>
           ) : (
-            <>
-              <li to='/profile'>
-                <Link to='/profile'>
-                  <h5>PROFILE</h5>
-                </Link>
-              </li>
               <li
-                to='/logout'
-                id='qsLogoutBtn'
-                onClick={() => {
-                  logoutWithRedirect();
-                }}
+                id='studentLoginBtn'
+                onClick={handleStudentLogout}
+                style={{ cursor: 'pointer' }}
               >
-                <Link to='/'>
-                  <h5>LOGOUT</h5>
-                </Link>
+                <h5>STUDENT LOGOUT</h5>
               </li>
-            </>
-          )} */}
+            )}
         </ul>
       </div>
     </nav>
